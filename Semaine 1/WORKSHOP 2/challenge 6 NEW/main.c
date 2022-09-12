@@ -8,10 +8,10 @@ int main()
     int i,j;
     int count=0;
     printf("entre 4 character: ");
-    scanf("%s",&b);
+    scanf("%s",&a);
 
     printf("entre 4 character: ");
-    scanf("%s",&a);
+    scanf("%s",&b);
 
     for(i=0;i<4;i++){
         for(j=0;j<4;j++){
