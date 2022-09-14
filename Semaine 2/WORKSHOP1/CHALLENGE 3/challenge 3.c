@@ -1,3 +1,8 @@
+
+
+                                           //une fonction bool isPremier() pour vérifier si un nombre il est premier ou non 
+
+
 #include <stdio.h>
 #include <stdbool.h>
 
@@ -10,7 +15,7 @@ bool isPremier(int N){
             premier= false ;
         }
      }
-     return premier;
+    return premier;
 }
 int main(){
 

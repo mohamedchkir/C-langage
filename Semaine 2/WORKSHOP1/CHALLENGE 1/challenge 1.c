@@ -1,3 +1,9 @@
+
+                                
+                                // une fonction add(int a , int b) qui permet de faire l'addition des deux nombres a et b.
+
+
+
 #include <stdio.h>
 
 int a,b,S; // Nombre a et b et S: la somme des deux

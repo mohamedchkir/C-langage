@@ -1,3 +1,6 @@
+
+                                          //une fonction echanger() pour échanger la valeur de a avec la valeur de b
+
 #include <stdio.h>
 
  int a,b;

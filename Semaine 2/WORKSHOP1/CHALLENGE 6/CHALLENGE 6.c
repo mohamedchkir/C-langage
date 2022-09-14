@@ -1,29 +1,25 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-char copy( char A[10]){
-int i;
-char B[10];
-for(i=0;i<10;i++){
-        if(A[10]=='\0'){
-        break;
-        }else{
-            A[i]=B[i];
-
-        }printf("\n%s",B);
-
+void copy(char A[20], char B[20]){
+    int i;
+    for(i=0;i<10;i++){
+   	    if(A[i]=='\0'){
+	        break;
+	    }
+    	    B[i]=A[i];
+	    
 }
 }
 int main(){
 
-char A[10];
-char B[10];
+    char B[20];
+    char A[20];
+            printf("entre une chaine de caractere contienne moins de 10 cararctere:\n");
+            scanf("%s",A),
 
-printf("entrer un mot de 10 caractere :");
-scanf("%s",A);
-copy(A[10]);
-
-
-
+    copy(A,B);
+            printf("%s",B);
 
 
 }

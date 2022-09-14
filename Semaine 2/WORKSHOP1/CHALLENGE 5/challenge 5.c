@@ -1,10 +1,13 @@
+
+
+                                 // Année Bissextile 
+
 #include <stdio.h>
 #include <stdbool.h>
 
  bool is_leap_year(int Y){
     int i;
     bool premier=true;
-
 
         if(Y%4==0 && Y%100!=0){
             premier= true;

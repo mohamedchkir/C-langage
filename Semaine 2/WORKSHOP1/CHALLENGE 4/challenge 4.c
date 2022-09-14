@@ -1,3 +1,9 @@
+
+
+                                            //une fonction divededby(int n,int a) qui retoune la division des deux valeurs
+                               // la fonction dividedby() pour contrôler si le nombre est premier en retourne true, sinon on retourne false.
+
+
 #include <stdio.h>
 #include <stdbool.h>
 
@@ -25,9 +31,9 @@ bool isPremier(int D){
 }
 int main(){
 
- div(a,b,D);
- isPremier(D);
-
+   div(a,b,D);
+   isPremier(D);
+ 
   bool premier;
         premier = isPremier(D);
           if(premier == true)
