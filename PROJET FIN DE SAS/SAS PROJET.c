@@ -8,12 +8,12 @@
     int i;
     int codeProduit,quantiteProduit;
     char nomProduit[50];
-    float prixProduit, somme=0;
+    float prixProduit,somme=0,totSomme=0;
     int sizeTAB=3;
     int numero;
     int n ;
     int position;
-    //int A;
+    int totquantite;
 
 // Structures section
 typedef struct {
@@ -45,14 +45,21 @@ void ajouterProduit(){
         sizeTAB++;
 
 }
+void tableau(){
+     printf("  -------------------------------------------------------------------------------------------------- \n " );
+     printf(" | nom                  |        prix          |    code du produit      |     quantiter du produit         |   \n" );
+     printf("  -------------------------------------------------------------------------------------------------- \n" );
+
+}
+void tableauCase(){
+printf("    %15s         |        %.2f        |      %5d       |        %5d              \n\n\n",TAB[i].nomProduit,TAB[i].prixProduit,TAB[i].codeProduit,TAB[i].quantiteProduit);
+}
 void afficherProduit(){
-     printf("  ------------------------------------------------------------------------------------ \n " );
-     printf(" | nom          |     prix        |  code du produit        |   quantiter du produit  |   \n" );
-     printf("  ------------------------------------------------------------------------------------ \n" );
+     tableau();
 
     for(i=0;i<sizeTAB;i++){
-     printf("    %10s         |        %.2f        |      %5d       |        %5d              \n\n\n",TAB[i].nomProduit,TAB[i].prixProduit,TAB[i].codeProduit,TAB[i].quantiteProduit);
-     printf("  ------------------------------------------------------------------------------------ \n" );
+     tableauCase();
+     printf("  -------------------------------------------------------------------------------------------------- \n" );
     }
  }
 
@@ -70,11 +77,8 @@ switch(numero){
      scanf("%d",&codeProduit);
     for(i=0;i<sizeTAB;i++){
      if(codeProduit==TAB[i].codeProduit){
-      printf("  ------------------------------------------------------------------------------------ \n " );
-      printf("  | nom         |     prix         |  code du produit    |   quantiter du produit  |   \n" );
-      printf("  ------------------------------------------------------------------------------------ \n" );
-      printf("  %10s          |        %.2f      |      %5d            |        %5d              \n\n\n",TAB[i].nomProduit,TAB[i].prixProduit,TAB[i].codeProduit,TAB[i].quantiteProduit);
-
+      tableau();
+      tableauCase();
         }
       else
        printf("le ID du produit est incorrect\n");
@@ -87,7 +91,7 @@ switch(numero){
       for(i=0;i<sizeTAB;i++){
        n= strcmp(nomProduit,TAB[i].nomProduit);
       if(n == 0)
-       printf("    %10s         |        %.2f        |      %5d       |        %5d              \n\n\n",TAB[i].nomProduit,TAB[i].prixProduit,TAB[i].codeProduit,TAB[i].quantiteProduit);
+        tableauCase();
       else
         printf("le Nom du produit est incorrect\n");
 }
@@ -129,12 +133,10 @@ scanf("%d",&numero);
 
  }
     void updateProduit(){
-             printf("  -------------------------------------------------------------------------------------------------- \n " );
-             printf(" | nom              |        prix        |       code du produit        |     quantiter du produit  |   \n" );
-             printf("  -------------------------------------------------------------------------------------------------- \n" );
+            tableau();
             for(i=0;i<sizeTAB;i++)
             if(TAB[i].quantiteProduit<3){
-             printf("  %10s          |        %.2f      |      %5d            |        %5d              \n\n\n",TAB[i].nomProduit,TAB[i].prixProduit,TAB[i].codeProduit,TAB[i].quantiteProduit);
+            tableauCase();
     }
             printf("ENTRER LE CODE DU PRODUIT QUE VOUS VOULEZ MODIFIER:\n");
             scanf("%d",&codeProduit);
@@ -162,14 +164,23 @@ void acheterProduit(){
                 {
                  somme = n*(TAB[i].prixProduit +(TAB[i].prixProduit*15)/100);
 
-            printf(" LA PRIX DE PRODUIT(S) ACHETER EST: %.2f\n\n\n",somme);
+            printf(" LE PRIX DE PRODUIT(S) ACHETER EST: %.2f DH\n\n\n",somme);
             TAB[i].quantiteProduit-=n;
+            totSomme+=somme;
+            totquantite+=n;
             }
-
              }
              }
 
         }
+ void statistiques(){
+
+            printf("la somme des prix de votre produits vendus est : %.3f DH\n",totSomme);
+            printf("le nombres de votre produits vendus est : %d PRODUITS\n\n\n",totquantite);
+
+
+
+ }
         //case 2:
             //printf("entrer le nom du produit:");
           //  scanf("%s",&nomProduit);
@@ -203,6 +214,7 @@ int main(){
        printf("\t | 4 ->> Ajouter un produit        |\n ");
        printf("\t | 5 ->> Mise a jour les produits  |\n ");
        printf("\t | 6 ->> Acheter un Produit        |\n ");
+       printf("\t | 7 ->> Afficher les statistiques |\n ");
        printf("\t  ---------------------------------\n ");
 
        printf("\n veuille choisir le service que tu veux par le nombre correspondant :");
@@ -234,9 +246,13 @@ system("cls");
         case 6:
            acheterProduit();
             break;
+
+        case 7:
+           statistiques();
+            break;
 }
 
-  if(numeroService<1 || numeroService>5 ){
+  if(numeroService<1 || numeroService>8 ){
     printf("!!!!!!!!!!!!entrer Un numero dans la liste!!!!!!!!!!\n");
 }
 
