@@ -8,12 +8,12 @@
     int i;
     int codeProduit,quantiteProduit;
     char nomProduit[50];
-    float prixProduit;
+    float prixProduit, somme=0;
     int sizeTAB=3;
     int numero;
     int n ;
     int position;
-    int A;
+    //int A;
 
 // Structures section
 typedef struct {
@@ -147,6 +147,29 @@ scanf("%d",&numero);
         }
         }
         }
+void acheterProduit(){
+          afficherProduit();
+          printf("ENTRER LE CODE DU PRODUIT QUE VOUS VOULEZ ACHTER:\n");
+            scanf("%d",&codeProduit);
+             for(i=0;i<sizeTAB;i++){
+             if(codeProduit==TAB[i].codeProduit){
+            printf("ENTRER La QUANTITE QUE VOUS VOULEZ ACHETER:\n");
+            scanf("%d",&n);
+            if(n>TAB[i].quantiteProduit){
+                printf("la quantite que vous voulez demander\n est superieur du quantite de stocke!!!\n");
+            }else
+
+                {
+                 somme = n*(TAB[i].prixProduit +(TAB[i].prixProduit*15)/100);
+
+            printf(" LA PRIX DE PRODUIT(S) ACHETER EST: %.2f\n\n\n",somme);
+            TAB[i].quantiteProduit-=n;
+            }
+
+             }
+             }
+
+        }
         //case 2:
             //printf("entrer le nom du produit:");
           //  scanf("%s",&nomProduit);
@@ -178,7 +201,8 @@ int main(){
        printf("\t | 2 ->> Rechercher un produit     |\n ");
        printf("\t | 3 ->> Supprimer un produit      |\n ");
        printf("\t | 4 ->> Ajouter un produit        |\n ");
-       printf("\t | 5 ->> mise a jour les produits  |\n ");
+       printf("\t | 5 ->> Mise a jour les produits  |\n ");
+       printf("\t | 6 ->> Acheter un Produit        |\n ");
        printf("\t  ---------------------------------\n ");
 
        printf("\n veuille choisir le service que tu veux par le nombre correspondant :");
@@ -205,6 +229,10 @@ system("cls");
 
         case 5:
             updateProduit();
+            break;
+
+        case 6:
+           acheterProduit();
             break;
 }
 
