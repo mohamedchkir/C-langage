@@ -5,103 +5,115 @@
 
 //variable section
     int numeroService;
-    int i;
     int codeProduit,quantiteProduit;
     char nomProduit[50];
-    float prixProduit,somme=0,totSomme=0;
+    float somme=0,totSomme=0,valeur;
     int sizeTAB=3;
     int numero;
-    int n ;
+    int n ,s;
     int position;
     int totquantite;
-
 // Structures section
 typedef struct {
     char nomProduit[50];
     float prixProduit;
     int codeProduit,quantiteProduit;
-}Affichage;
+}Product;
 
-    Affichage TAB[300]={
+    Product TAB[300]={
     {"ASPRO" ,12.5,1,6},
-    {"DOLIPRAN",15,5,2},
-    {"MAGNIZIUM",18,3,1}
+    {"MAGNIZIUM",18,3,1},
+    {"DOLIPRAN",15,5,2}
 
 
 };
 
-
 // functions section
 void ajouterProduit(){
-
         printf("entrer le nom de produit:");
-        scanf("%s",&TAB[i].nomProduit);
+        scanf("%s",TAB[sizeTAB].nomProduit);
         printf("entrer le prix de produit:");
-        scanf("%f",&TAB[i].prixProduit);
+        scanf("%f",&TAB[sizeTAB].prixProduit);
         printf("entrer la quantite de produit:");
-        scanf("%d",&TAB[i].quantiteProduit);
+        scanf("%d",&TAB[sizeTAB].quantiteProduit);
         printf("entrer le code de prduit:");
-        scanf("%d",&TAB[i].codeProduit);
+        scanf("%d",&TAB[sizeTAB].codeProduit);
         sizeTAB++;
 
 }
 void tableau(){
-     printf("  -------------------------------------------------------------------------------------------------- \n " );
-     printf(" | nom                  |        prix          |    code du produit      |     quantiter du produit         |   \n" );
-     printf("  -------------------------------------------------------------------------------------------------- \n" );
+     printf("  -----------------------------------------------------------------------------------------------------------------\n" );
+     printf("  |        Nom              |        Prix      |    Prix TTC      |    Code du produit   |   Quantiter du produit |\n" );
+     printf("  -----------------------------------------------------------------------------------------------------------------\n" );
 
 }
 void tableauCase(){
-printf("    %15s         |        %.2f        |      %5d       |        %5d              \n\n\n",TAB[i].nomProduit,TAB[i].prixProduit,TAB[i].codeProduit,TAB[i].quantiteProduit);
-}
-void afficherProduit(){
-     tableau();
-
+    int i;
     for(i=0;i<sizeTAB;i++){
-     tableauCase();
-     printf("  -------------------------------------------------------------------------------------------------- \n" );
-    }
- }
+printf("  |    %15s      |        %.2f     |        %.2f     |      %5d           |        %5d           |\n\n",TAB[i].nomProduit,TAB[i].prixProduit,TAB[i].prixProduit+(TAB[i].prixProduit*0.15),TAB[i].codeProduit,TAB[i].quantiteProduit);
+}
+}
 
+void afficherProduit(){
+	Product prixProduit;
+	int i,j;
+	for(i=0;i<sizeTAB;i++){
+       for(j=i+1;j<sizeTAB;j++){
+          if(TAB[i].prixProduit<TAB[j].prixProduit){
+            prixProduit=TAB[j];
+             TAB[j]=TAB[i];
+             TAB[i]= prixProduit;
+       	   }
+       }
+   }
+tableau();
+     tableauCase();
+     printf("  -----------------------------------------------------------------------------------------------------------------\n\n\n" );
+}
 
 void chercherProduit(){
-
+   int i;
      printf("choisi comment vous voullez chercher le produit par le nombre  :\n");
      printf("1---->>PAR  ID<<\n");
      printf("2---->>PAR NOM<< \n");
      scanf("%d",&numero);
 
-switch(numero){
-    case 1:
-     printf("entrer le ID du produit:");
-     scanf("%d",&codeProduit);
-    for(i=0;i<sizeTAB;i++){
-     if(codeProduit==TAB[i].codeProduit){
-      tableau();
-      tableauCase();
-        }
-      else
-       printf("le ID du produit est incorrect\n");
-}
-      break;
+  switch(numero){
+        case 1:
+         printf("entrer le ID du produit:");
+         scanf("%d",&codeProduit);
+          for(i=0;i<sizeTAB;i++){
+             if(codeProduit==TAB[i].codeProduit){
+               tableau();
+				printf("  |    %15s      |        %.2f     |        %.2f     |      %5d           |        %5d           |\n\n",TAB[i].nomProduit,TAB[i].prixProduit,TAB[i].prixProduit+(TAB[i].prixProduit*0.15),TAB[i].codeProduit,TAB[i].quantiteProduit);
+             }
+             else
+                 printf("le ID du produit est incorrect\n");
+          }
+          break;
 
       case 2:
        printf("entrer le nom du produit:");
-       scanf("%s",&nomProduit);
-      for(i=0;i<sizeTAB;i++){
-       n= strcmp(nomProduit,TAB[i].nomProduit);
-      if(n == 0)
-        tableauCase();
-      else
-        printf("le Nom du produit est incorrect\n");
-}
-       break;
+       scanf("%s",nomProduit);
+        for(i=0;i<sizeTAB;i++){
+         n= strcmp(nomProduit,TAB[i].nomProduit);
+           if(n == 0){
+            tableau();
+printf("  |    %15s      |        %.2f     |        %.2f     |      %5d           |        %5d           |\n\n",TAB[i].nomProduit,TAB[i].prixProduit,TAB[i].prixProduit+(TAB[i].prixProduit*0.15),TAB[i].codeProduit,TAB[i].quantiteProduit);
+
+            }
+              else{
+                printf("le Nom du produit est incorrect\n");
+               }
+        }
+        break;
 
 
 
 }
 }
 void supprimerProduit(){
+int i;
 
 printf("choisi comment vous voullez chercher le produit que vous voulez supprimer  :\n");
 printf("1---->>PAR  ID<<\n");
@@ -124,15 +136,17 @@ scanf("%d",&numero);
             printf("\n le tableau apres supprimer L'Element  est:\n");
 
            afficherProduit();
-            break;}
+            }
         else{
             printf("le ID du produit est incorrect\n");
 
-        }}
+        }
+        }break;
      }
 
  }
     void updateProduit(){
+int i;
             tableau();
             for(i=0;i<sizeTAB;i++)
             if(TAB[i].quantiteProduit<3){
@@ -150,6 +164,7 @@ scanf("%d",&numero);
         }
         }
 void acheterProduit(){
+int i;
           afficherProduit();
           printf("ENTRER LE CODE DU PRODUIT QUE VOUS VOULEZ ACHTER:\n");
             scanf("%d",&codeProduit);
@@ -181,26 +196,7 @@ void acheterProduit(){
 
 
  }
-        //case 2:
-            //printf("entrer le nom du produit:");
-          //  scanf("%s",&nomProduit);
-        //for(i=0;i<sizeTAB;i++){
-          //  n= strcmp(nomProduit,TAB[i].nomProduit);
-        //if(n == 0){
-       //     printf("%d\n",i);
-       // break;
 
-
-      //  else
-        //    printf("le Nom du produit est incorrect\n");
-          //  break;
-
-
-
-
-
-//}
-//}
 
 
 int main(){
@@ -257,9 +253,10 @@ system("cls");
 }
 
 }
-while (numeroService>0 || numeroService<6);
+while (numeroService>0 || numeroService<8);
 
 
 
     return 0;
 }
+
