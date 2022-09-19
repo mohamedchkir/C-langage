@@ -21,7 +21,7 @@ typedef struct {
 }Product;
 
     Product TAB[300]={
-    {"ASPRO" ,12.5,1,6},
+    {"ASPRO" ,12.5,4,6},
     {"MAGNIZIUM",18,3,1},
     {"DOLIPRAN",15,5,2}
 
@@ -74,21 +74,22 @@ tableau();
 void chercherProduit(){
    int i;
      printf("choisi comment vous voullez chercher le produit par le nombre  :\n");
-     printf("1---->>PAR  ID<<\n");
-     printf("2---->>PAR NOM<< \n");
+     printf("1---->>PAR CODE<<\n");
+     printf(" 2---->>PAR NOM<< \n");
      scanf("%d",&numero);
 
   switch(numero){
         case 1:
-         printf("entrer le ID du produit:");
+         printf("entrer le Code du produit:");
          scanf("%d",&codeProduit);
           for(i=0;i<sizeTAB;i++){
              if(codeProduit==TAB[i].codeProduit){
                tableau();
 				printf("  |    %15s      |        %.2f     |        %.2f     |      %5d           |        %5d           |\n\n",TAB[i].nomProduit,TAB[i].prixProduit,TAB[i].prixProduit+(TAB[i].prixProduit*0.15),TAB[i].codeProduit,TAB[i].quantiteProduit);
+              break;
              }
              else
-                 printf("le ID du produit est incorrect\n");
+                 printf("le Code du produit est incorrect\n");
           }
           break;
 
@@ -99,8 +100,8 @@ void chercherProduit(){
          n= strcmp(nomProduit,TAB[i].nomProduit);
            if(n == 0){
             tableau();
-printf("  |    %15s      |        %.2f     |        %.2f     |      %5d           |        %5d           |\n\n",TAB[i].nomProduit,TAB[i].prixProduit,TAB[i].prixProduit+(TAB[i].prixProduit*0.15),TAB[i].codeProduit,TAB[i].quantiteProduit);
-
+            printf("  |    %15s      |        %.2f     |        %.2f     |      %5d           |        %5d           |\n\n",TAB[i].nomProduit,TAB[i].prixProduit,TAB[i].prixProduit+(TAB[i].prixProduit*0.15),TAB[i].codeProduit,TAB[i].quantiteProduit);
+             break;
             }
               else{
                 printf("le Nom du produit est incorrect\n");
@@ -113,35 +114,51 @@ printf("  |    %15s      |        %.2f     |        %.2f     |      %5d         
 }
 }
 void supprimerProduit(){
-int i;
+    int i;
 
-printf("choisi comment vous voullez chercher le produit que vous voulez supprimer  :\n");
-printf("1---->>PAR  ID<<\n");
-printf("2---->>PAR NOM<< \n");
-scanf("%d",&numero);
+        printf("choisi comment vous voullez chercher le produit que vous voulez supprimer  :\n");
+        printf("1---->>PAR CODE<<\n");
+        printf(" 2---->>PAR NOM<< \n");
+        scanf("%d",&numero);
 
-            switch(numero){
+    switch(numero){
 
         case 1:
-            printf("entrer le ID du produit:");
+            printf("entrer le Code du produit:");
             scanf("%d",&codeProduit);
-        for(i=0;i<sizeTAB;i++){
-        if(codeProduit==TAB[i].codeProduit){
-                printf("%d\n",i);
-                position=i;
-        for(i=position;i<sizeTAB;i++){
-            TAB[i]=TAB[i+1];
-            sizeTAB--;
-       }
-            printf("\n le tableau apres supprimer L'Element  est:\n");
-
-           afficherProduit();
+            for(i=0;i<sizeTAB;i++){
+                if(codeProduit==TAB[i].codeProduit){
+                    position=i;
+            for(i=position;i<sizeTAB;i++){
+                TAB[i]=TAB[i+1];
             }
-        else{
-            printf("le ID du produit est incorrect\n");
+            sizeTAB--;
+            printf("\n le tableau apres supprimer L'Element  est:\n");
+            tableau();
+            tableauCase();
 
+            break;}
+            else{
+            printf("le Code du produit est incorrect\n");
         }
-        }break;
+           }break;
+
+         case 2:
+            printf("entrer le nom du produit:");
+            scanf("%s",nomProduit);
+            for(i=0;i<sizeTAB;i++){
+            n= strcmp(nomProduit,TAB[i].nomProduit);
+            if(n == 0){
+            TAB[i]=TAB[i+1]; }
+            sizeTAB--;
+            tableau();
+            tableauCase();
+            break;}
+            else{
+                printf("le Nom du produit est incorrect\n");
+               }
+
+        break;
      }
 
  }
