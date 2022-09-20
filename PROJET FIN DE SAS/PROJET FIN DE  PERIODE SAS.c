@@ -10,7 +10,7 @@
     float somme=0,totalSomme=0,valeur;
     int sizeTAB=3;
     int numero;
-    int n ,s;
+    int  s,n;
     int position,sold_cont=0;
     int totalquantite;
 
@@ -205,7 +205,7 @@ void supprimerProduit(){
     }
 
 void acheterProduit(){
-        int i;
+        int i,n;
            afficherProduit();
            printf("ENTRER LE CODE DU PRODUIT QUE VOUS VOULEZ ACHTER:\n");
            scanf("%d",&codeProduit);
@@ -221,11 +221,12 @@ void acheterProduit(){
                       printf(" LE PRIX DE PRODUIT(S) ACHETER EST: %.2f DH\n\n\n",somme);
                       TAB[i].quantiteProduit-=n;
                       totalSomme+=somme;
+					  totalquantite+=n;
                       strcpy(T_sold[sold_cont].Pname,TAB[i].nomProduit);
                       T_sold[sold_cont].productPRIX=TAB[i].prixProduit;
                        T_sold[sold_cont].Productquantity=n;
                        sold_cont++;
-                       totalquantite+=n;
+                       
                     }
                   }
                }
@@ -234,11 +235,29 @@ void acheterProduit(){
 
  void statistiques(){
 int i;
+float min,max;
+
            for(i=0;i<sold_cont;i++){
                 printf("  NAME: %s \n  PRIX: %.3f DH \n  QUANTITY: %d \n",T_sold[i].Pname,T_sold[i].productPRIX,T_sold[i].Productquantity);
+                printf("  NAME: %s \n  PRIX: %.3f DH \n  QUANTITY: %d \n",T_sold[i].Pname,T_sold[i].productPRIX,T_sold[i].Productquantity);
            }
-            printf("la somme des prix de votre produits vendus est -----> %.3f DH\n",totalSomme);
-            printf("le nombres de votre produits vendus est ----->%d PRODUITS\n\n\n",totalquantite);
+           
+               min = T_sold[0].productPRIX;
+               for(i=0;i<sold_cont;i++){
+                   if (T_sold[i+1].productPRIX<min){
+				    	min = T_sold[i].productPRIX;
+					}
+                }
+                max = T_sold[0].productPRIX;
+                for(i=0;i<sold_cont;i++){
+                   if (T_sold[i+1].productPRIX>max){
+					   max = T_sold[i].productPRIX;
+				   }
+                }
+                    printf("la somme des prix de votre produits vendus est -----> %.3f DH\n",totalSomme);
+                    printf("le nombres de votre produits vendus est ----->%d PRODUITS\n\n\n",totalquantite);
+                    printf("le plus petit prix de produit que vous avez vendus est .3f DH\n\n\n",min);
+                    printf("le plus grand prix de produit que vous avez vendus est----->%.3f DH\n\n\n",max);
    }
 
 
